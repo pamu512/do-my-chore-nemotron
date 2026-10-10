@@ -248,7 +248,12 @@ class KidTodayBody extends StatelessWidget {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [Color(0x331F2621), Color(0xB31F2621)],
+                      colors: [
+                        Color(0x401F2621),
+                        Color(0xEB1F2621),
+                        Color(0xEB1F2621),
+                      ],
+                      stops: [0.0, 0.62, 1.0],
                     ),
                   ),
                 ),

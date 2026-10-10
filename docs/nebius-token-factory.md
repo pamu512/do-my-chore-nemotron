@@ -120,7 +120,7 @@ Edge functions treat goal text as **data**, not instructions. This is a POC guar
 
 ## Privacy
 
-Family and AI-related data is never sold and never used for advertising. Edge logs (when added) may include provider, model, latency, success/fallback only — never keys or image bytes.
+Family and AI-related data is never sold and never used for advertising. Edge logs (when added) may include provider, model, latency, success/fallback only, never keys or image bytes.
 
 ### Photo hygiene
 

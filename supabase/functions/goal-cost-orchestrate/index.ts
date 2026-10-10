@@ -2,7 +2,7 @@
 // Goal-first: targetAmount is optional. Missing amount uses the static
 // goal_mode prior (or an LLM estimate from goal text). Never 500 on no key.
 //
-// Keys (all optional — Basics still works with none):
+// Keys (all optional; Basics still works with none):
 //   NEBIUS_API_KEY  → Token Factory + Nemotron
 //   OPENAI_API_KEY  → gpt-4o-mini
 //   TAVILY_API_KEY  → deal search; skip search if unset

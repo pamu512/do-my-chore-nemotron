@@ -54,7 +54,7 @@ async function assistWithVision(
             text:
               `A kid claims they finished the chore: "${choreTitle}". ` +
               "Look at the photo. Reply ONLY JSON: {\"suggest\": \"approve\"|\"reject\", \"reason\": string}. " +
-              "The reason is one kind sentence for the parent. You are not certain — if the photo is unclear, suggest reject gently.",
+              "The reason is one kind sentence for the parent. You are not certain. If the photo is unclear, suggest reject gently.",
           },
           { type: "image_url", image_url: { url: `data:image/jpeg;base64,${imageBase64}` } },
         ],
@@ -100,7 +100,7 @@ Deno.serve(async (req) => {
     const { choreTitle, image } = await req.json();
     if (!isVisuallyVerifiable(String(choreTitle))) {
       return Response.json(
-        abstain("This chore is not visually checkable — decide based on trust."),
+        abstain("This chore is not visually checkable. Decide based on trust."),
         { headers: { ...CORS, "Content-Type": "application/json" } },
       );
     }

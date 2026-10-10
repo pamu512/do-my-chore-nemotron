@@ -1,8 +1,8 @@
-# Do My Chore — Nebius AI + personal-data protection design
+# Do My Chore: Nebius AI + personal-data protection design
 
 **Status:** draft for Anoop review (28 Sep 2026)  
 **Branch / PR:** `feat/nebius-token-factory` · https://github.com/pamu512/do-my-chore/pull/3  
-**Track:** Nebius × NVIDIA Global AI Hackathon — Best Apps and Agents (dual-submit; must not block Build With AI: Basics)
+**Track:** Nebius × NVIDIA Global AI Hackathon: Best Apps and Agents (dual-submit; must not block Build With AI: Basics)
 
 ---
 
@@ -179,7 +179,7 @@ Otherwise abstain. Parent decides.
 5. Human-in-the-loop on approve / lock.
 6. Zero-key and DEMO_WALK fallbacks for Basics.
 7. **No sale / no advertising use** (section 2).
-8. Edge logs: provider, model, latency, success/fallback only — never keys, base64 images, or full photo prompts.
+8. Edge logs: provider, model, latency, success/fallback only, never keys, base64 images, or full photo prompts.
 9. Public repo: demo data only; no real family dumps.
 10. Honesty: POC is not COPPA-grade consent; required before production families.
 

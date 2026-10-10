@@ -1,6 +1,6 @@
-# Encouragement Layer V3 — Implementation Plan
+# Encouragement Layer V3: Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For implementers:** Work through the steps in order. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Add the V3 emotional feedback layer (next-try, day/goal celebration, soft pace) on top of the shipped rev-3 % / $ split without new schema.
 
@@ -529,7 +529,7 @@ Add `import 'package:do_my_chore/services/encouragement.dart';` at the top of `o
 
 Run: `cd app && flutter test test/overshoot_test.dart --name "reject builds"`
 
-Expected: FAIL — default still contains “try again”.
+Expected: FAIL. Default still contains “try again”.
 
 - [ ] **Step 3: Write minimal implementation**
 
@@ -762,7 +762,7 @@ const paceTitle = 'Two check-ins today puts the week back on pace.';
 const paceBody = 'Bed and dishes are right there - each one moves the bar.';
 ```
 
-- [ ] **Step 2: Run tests — expect FAIL** (library missing)
+- [ ] **Step 2: Run tests. Expect FAIL** (library missing)
 
 Run: `cd app && flutter test test/encouragement_widgets_test.dart`
 
@@ -778,7 +778,7 @@ Keep them dumb: `Dmc.marigoldSoft` / `Dmc.cream` / `Dmc.pineSoft` cards matching
 - `KidSentConfirmation`: pine ring, titles from spec, `Back to today` calls `onBack`.
 - `KidGoalEarnedFinale`: full-bleed `Image.asset('assets/photos/castle.jpg')`, `100%`, `You earned it.`, `handOff`, goal title chip. No `$`.
 
-- [ ] **Step 4: Run tests — expect PASS**
+- [ ] **Step 4: Run tests. Expect PASS**
 
 Run: `cd app && flutter test test/encouragement_widgets_test.dart`
 
@@ -853,7 +853,7 @@ void main() {
 }
 ```
 
-- [ ] **Step 2: Run — expect FAIL**
+- [ ] **Step 2: Run. Expect FAIL**
 
 Run: `cd app && flutter test test/send_back_sheet_test.dart`
 
@@ -961,14 +961,14 @@ Add a second test: `weeksElapsed: 7`, `choreProgressPct: 20`, both chores `open`
 
 Add a third test: both chores `pending` → finds `That's today done.`, finds both sent chips, finds no pace card.
 
-- [ ] **Step 2: Run — expect FAIL** (`KidTodayBody` missing)
+- [ ] **Step 2: Run. Expect FAIL** (`KidTodayBody` missing)
 
 - [ ] **Step 3: Implement Today wiring**
 
 In `KidTodayBody.build`:
 
-1. If any goal `choreProgressPct >= 100 - 1e-9`, render `KidGoalEarnedFinale` (Task 8 can finish the asset polish; a placeholder that already shows “You earned it.” is OK here if Task 8 is next — **prefer calling `KidGoalEarnedFinale` now** so this test can assert it).
-2. Else show existing hero + rail. Hero line = `kidHeroLine(behindPace: g.kidBehindPace, goalMode: g.goalMode)` — **never** “Keep the habits going. 100% earns the trip.”
+1. If any goal `choreProgressPct >= 100 - 1e-9`, render `KidGoalEarnedFinale` (Task 8 can finish the asset polish; a placeholder that already shows “You earned it.” is OK here if Task 8 is next. **Prefer calling `KidGoalEarnedFinale` now** so this test can assert it).
+2. Else show existing hero + rail. Hero line = `kidHeroLine(behindPace: g.kidBehindPace, goalMode: g.goalMode)`. **Never** “Keep the habits going. 100% earns the trip.”
 3. Compute `kinds = chores.map((c) => c.rowKind(now))`.
 4. If `allSent(kinds)`: insert `KidDayDoneCard(movedPct: todayMovedPct(...))` above the list. Keep every row, each with `KidSentChip`. Rows are not tappable.
 5. Else if `g.kidBehindPace` and any kind is `open`: insert `KidPaceCard` with `paceCardTitle(checkInsToOnPace(...))` and `paceCardBody(openTitles)`. `openCreditsDesc` = instance credits of `open` chores, sorted descending.
@@ -1031,16 +1031,16 @@ testWidgets('retry uses A note from your parent', (tester) async {
 
 `_FakeChoreService` can be a tiny `Fake` / hand-rolled subclass only if `ChoreService` is hard to fake. Prefer extracting the note + sent views so the sent test pumps `KidSentConfirmation` (already covered) and this test pumps Mark Done with `choreService` nullable-unsafe.
 
-If constructing `ChoreService` is painful, split a `MarkDoneView` that takes `onSubmit` / `sent` flags — keep it in `mark_done_screen.dart`.
+If constructing `ChoreService` is painful, split a `MarkDoneView` that takes `onSubmit` / `sent` flags. Keep it in `mark_done_screen.dart`.
 
 Second test: tap `Done! Send to parent` on a non-photo chore → finds `Sent to your parent.` and does **not** pop the route (use a `Navigator` observer or expect the sent title on the same route).
 
-- [ ] **Step 2: Run — expect FAIL** (`PARENT SAID` still there; submit pops)
+- [ ] **Step 2: Run. Expect FAIL** (`PARENT SAID` still there; submit pops)
 
 - [ ] **Step 3: Implement**
 
 - Replace the `PARENT SAID` block with `KidNextTryNote(note: chore.nudge!)`.
-- On success: `setState(() => _sent = true)` — do not pop.
+- On success: `setState(() => _sent = true)`. Do not pop.
 - When `_sent`: body is `KidSentConfirmation(onBack: () => Navigator.pop(context))`.
 - Align photo-attached line with mock if touched: `Photo attached - it counts once your parent takes a look.` (only if you are already in that widget; do not drive-by rewrite other strings).
 
@@ -1070,11 +1070,11 @@ git commit -m "feat(v3): parent note eyebrow and after-send confirmation"
 - Consumes: `earnedHandOff(goalMode:)`, `assets/photos/castle.jpg` (no goal cover column)
 - Produces: Today body is the finale when `choreProgressPct >= 100 - 1e-9`
 
-- [ ] **Step 1: Failing test** — `GoalProgressView` with `choreProgressPct: 100` finds `You earned it.`, `100%`, hand-off containing `talk about the trip`, finds no `$`, finds no Today chore list.
+- [ ] **Step 1: Failing test.** `GoalProgressView` with `choreProgressPct: 100` finds `You earned it.`, `100%`, hand-off containing `talk about the trip`, finds no `$`, finds no Today chore list.
 
-- [ ] **Step 2: Run — expect FAIL** if finale is not yet the only body.
+- [ ] **Step 2: Run. Expect FAIL** if finale is not yet the only body.
 
-- [ ] **Step 3: Implement** — when earned, return `KidGoalEarnedFinale` as the scroll body (hero image = existing castle asset). Do not show the pace card or day-done card on top of it.
+- [ ] **Step 3: Implement.** When earned, return `KidGoalEarnedFinale` as the scroll body (hero image = existing castle asset). Do not show the pace card or day-done card on top of it.
 
 - [ ] **Step 4: Run** `cd app && flutter test test/kid_today_encouragement_test.dart test/encouragement_widgets_test.dart`
 

@@ -1,6 +1,6 @@
 # Goal-first Nebius AI Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. **Do not start coding until Anoop explicitly says to implement.** This document is plan + requirements + fallbacks only.
+> **For implementers:** Work through the steps in order. Steps use checkbox (`- [ ]`) syntax for tracking. **Do not start coding until Anoop explicitly says to implement.** This document is plan + requirements + fallbacks only.
 
 **Goal:** Let a parent type a plain-language goal and get a save-cost estimate plus a primary-kid chore plan via Nebius Token Factory / Nemotron (with zero-key Basics-safe fallbacks), without trip booking and without selling or advertising on family data.
 
@@ -14,13 +14,13 @@
 
 - **No GitHub fork.** Same repo `pamu512/do-my-chore`. Branch: `feat/nebius-token-factory` (PR #3). Optional later: a second feature branch off this one if we need to split docs from product code; still not a fork.
 - **Do not block Build With AI: Basics.** `DEMO_WALK=true` and zero API keys must still complete the Basics demo loop.
-- **Merge gate:** do not merge PR #3 until Basics demo video URL is on the Basics Devpost draft **or** Do My chore agent / Anoop gives explicit OK.
+- **Merge gate:** do not merge PR #3 until Basics demo video URL is on the Basics Devpost draft **or** Anoop gives explicit OK.
 - **Final Submit:** Nebius Devpost Final Submit only with Anoop present.
 - **Privacy:** never sell family/AI data; never use it for advertising; prompts never include names, emails, auth uids, family ids, ledger, or addresses.
 - **Kid context v1:** primary / selected kid age only. Multi-kid chore plans = stretch only.
 - **Not in scope:** travel itinerary, flights, hotels, bookings, payment rails, COPPA-grade consent (honesty notice only for POC).
 - **Copy:** weekly save = parent funding real cost; must not read as kid pocket money. No em dashes in user-facing copy.
-- **Secrets:** `NEBIUS_API_KEY`, optional `OPENAI_API_KEY`, optional `TAVILY_API_KEY`, optional model overrides — Supabase function secrets only, never git or Flutter `--dart-define`.
+- **Secrets:** `NEBIUS_API_KEY`, optional `OPENAI_API_KEY`, optional `TAVILY_API_KEY`, optional model overrides. Supabase function secrets only, never git or Flutter `--dart-define`.
 - **Provider order:** Nebius → OpenAI → deterministic / abstain (existing `_shared/llm.ts`).
 
 ---
@@ -40,13 +40,13 @@
 
 ## Requirements
 
-### R1 — Parent goal-first input
+### R1: Parent goal-first input
 
 - Parent provides free-text goal (required). Amount is **not** required up front.
 - App attaches primary / selected kid age automatically.
 - If deadline cannot be inferred (e.g. “sometime next year”), UI may ask **one** clarifying date; otherwise derive weeks from text (e.g. Christmas → next 25 Dec).
 
-### R2 — AI outputs before Accept
+### R2: AI outputs before Accept
 
 Single review surface must show:
 
@@ -56,31 +56,31 @@ Single review surface must show:
 4. Chore plan: 4–8 chores, weights sum ≥ 100, `requires_photo` only when visually checkable, `why` in plain parent language
 5. Source badge: live model vs deterministic fallback (honest UI)
 
-### R3 — Parent control
+### R3: Parent control
 
 - Parent can override locked amount (default likely) and edit chores before Accept.
 - Accept locks `goals.target_amount`, plan `weekly_parent_save`, stores `cost_estimate` / `deal_snapshot` under RLS.
 - AI never auto-approves chores or writes ledger entries.
 
-### R4 — Photo Assist (unchanged contract)
+### R4: Photo Assist (unchanged contract)
 
 - Suggest only on Approvals when photo exists and chore is visually checkable.
 - Abstain otherwise; parent final.
 - Payload: chore title + image only (no names).
 
-### R5 — Basics safety
+### R5: Basics safety
 
 - Zero keys → full path with deterministic estimate + catalogs.
 - `DEMO_WALK=true` → local builders only; skip network estimate sheet friction that would break the video script (keep scriptable path).
 - Existing Basics Devpost docs (`docs/demo-video-script.md`, `docs/devpost-draft.md`) must not be forced to mention Nebius.
 
-### R6 — Privacy / ads
+### R6: Privacy / ads
 
 - Documented promise in design + in-app one-liner near first AI call.
-- Edge logs: provider, model, latency, success/fallback only — never keys or image bytes.
+- Edge logs: provider, model, latency, success/fallback only, never keys or image bytes.
 - Privacy backlog items (EXIF strip, short-TTL signed URLs) tracked as tasks below; block “real families” messaging until done, not the hackathon POC demo with synthetic data.
 
-### R7 — Hackathon eligibility
+### R7: Hackathon eligibility
 
 - At least one live path uses Nebius Token Factory + NVIDIA open model when `NEBIUS_API_KEY` is set.
 - Demo video / Devpost for Nebius must name Nebius + Nemotron when that project is created (separate from Basics; create only when story is real).
@@ -130,14 +130,14 @@ Single review surface must show:
 
 **Likely modify for goal-first:**
 
-- `supabase/functions/suggest-plan/index.ts` — accept goal text without requiring parent amount; return estimate + plan together **or** orchestrate internal call to cost helper
-- `supabase/functions/goal-cost-orchestrate/index.ts` — allow missing `targetAmount` (estimate-from-text mode)
-- `app/lib/services/edge_ai_client.dart` / `ai_service.dart` / `goal_service.dart` — new invoke shape
-- `app/lib/features/parent/` New Goal UI — goal-first fields; wire estimate+plan review before Accept
-- `app/lib/features/parent/cost_deal_sheet.dart` — fold into pre-Accept review or keep as step 2 of same flow
+- `supabase/functions/suggest-plan/index.ts`: accept goal text without requiring parent amount; return estimate + plan together **or** orchestrate internal call to cost helper
+- `supabase/functions/goal-cost-orchestrate/index.ts`: allow missing `targetAmount` (estimate-from-text mode)
+- `app/lib/services/edge_ai_client.dart` / `ai_service.dart` / `goal_service.dart`: new invoke shape
+- `app/lib/features/parent/` New Goal UI: goal-first fields; wire estimate+plan review before Accept
+- `app/lib/features/parent/cost_deal_sheet.dart`: fold into pre-Accept review or keep as step 2 of same flow
 - Deno tests under `supabase/functions/_shared/`
 - Flutter tests under `app/test/`
-- `docs/nebius-token-factory.md` — goal-first sequence + privacy one-liner
+- `docs/nebius-token-factory.md`: goal-first sequence + privacy one-liner
 - Optional: EXIF strip on photo upload path under `app/lib/services/` or storage helper
 
 **Do not touch unless needed for compile:** Basics-only demo script intent; avoid rewriting `docs/demo-video-script.md` to require Nebius.
@@ -150,10 +150,10 @@ Single review surface must show:
 
 **Request (minimized):**
 
-- `goalText` (string, required) — parent free text (may also accept legacy `title`)
+- `goalText` (string, required): parent free text (may also accept legacy `title`)
 - `kidAge` (number, required)
 - `targetDate` (string YYYY-MM-DD, optional)
-- `targetAmount` (number, optional) — if present, treat as parent prior; if absent, model/deterministic estimates
+- `targetAmount` (number, optional): if present, treat as parent prior; if absent, model/deterministic estimates
 - `goalMode` (optional hint)
 
 **Response:**
@@ -163,7 +163,7 @@ Single review surface must show:
 - `weeks`: number
 - `slots` (optional): `{ goal_mode, place?, duration_days?, party_size_default? }`
 - `weekly_parent_save`, `chores[]`, `why` (existing plan fields)
-- `deals` / `deal_search` — either here or only from cost orchestrate; pick one place in Task 2 and stay consistent
+- `deals` / `deal_search`: either here or only from cost orchestrate; pick one place in Task 2 and stay consistent
 
 ### `POST /functions/v1/goal-cost-orchestrate`
 
@@ -191,7 +191,7 @@ Unchanged: `{ choreTitle, image? }` → `{ suggest, reason }`.
 
 ---
 
-### Task 2: Edge contract — estimate without required amount
+### Task 2: Edge contract, estimate without required amount
 
 **Files:**
 
@@ -284,7 +284,7 @@ Unchanged: `{ choreTitle, image? }` → `{ suggest, reason }`.
 - Supabase secrets (hosted project used for demo)
 - `docs/nebius-token-factory.md`
 - Nebius Devpost project (create only when demo story ready)
-- Coordinate with Do My chore agent on Basics video gate
+- Coordinate with Anoop on the Basics video gate
 
 **Requirements:**
 
