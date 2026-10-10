@@ -1,6 +1,6 @@
 # Do My Chore Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For implementers:** Work through the steps in order. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Ship a Flutter + Supabase POC for Build With AI: Basics where a parent sets a kid goal, gets an AI save/chore plan, kids complete chores (photo when required), parent approves, ledger fills goal bank vs pocket (overshoot → pocket), and photos land in a deletable Goal Album.
 
@@ -11,7 +11,7 @@
 ## Global Constraints
 
 - Spec (authoritative): `docs/superpowers/specs/2026-09-27-do-my-chore-design.md` (rev 2)
-- **Empty folder / new repo only** — no ReadyPup or Care Ladder code
+- **Empty folder / new repo only.** No ReadyPup or Care Ladder code
 - In-app ledger only; no banking/KYC/cards; copy says parent settles real money offline
 - COPPA-style consent out of scope; demo photos are test data only
 - `requires_photo` only for visually verifiable chores; parent always final on approve
@@ -70,7 +70,7 @@ do-my-chore/                          # new GitHub repo root
 
 **Files:**
 - Create: repo root, `README.md`, `LICENSE` (MIT), copy design+plan into `docs/superpowers/...`
-- Create: `scope.md`, `prd.md`, `spec.md` (content aligned to design; produced via Devpost Learn skill pack commands when Mac Hermes runs `/onboard`→`/scope`→`/prd`→`/spec`, or authored to match design if skills not installed yet — **must exist before Final Submit**)
+- Create: `scope.md`, `prd.md`, `spec.md` (content aligned to design; produced via Devpost Learn skill pack commands when Mac Hermes runs `/onboard`→`/scope`→`/prd`→`/spec`, or authored to match design if skills not installed yet. **Must exist before Final Submit**)
 
 **Interfaces:**
 - Produces: public empty-origin repo URL; planning docs judges require
@@ -125,7 +125,7 @@ create table goals (
 
 ---
 
-### Task 2: Ledger math (pure Dart) — overshoot + balances
+### Task 2: Ledger math (pure Dart), overshoot + balances
 
 **Files:**
 - Create: `app/lib/services/ledger_math.dart`
@@ -152,7 +152,7 @@ test('under target all to goal when split 100%', () {
 
 Also test `sumLedger` for goal vs pocket totals; progress capped at 1.0.
 
-- [ ] **Step 2:** Run `flutter test test/ledger_math_test.dart` — expect FAIL
+- [ ] **Step 2:** Run `flutter test test/ledger_math_test.dart`. Expect FAIL
 
 - [ ] **Step 3:** Implement `ledger_math.dart`
 

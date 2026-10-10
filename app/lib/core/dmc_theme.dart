@@ -13,7 +13,7 @@ abstract final class Dmc {
   static const ink = Color(0xFF1F2621);
   static const ink2 = Color(0xFF4A544D);
   static const muted = Color(0xFF5D675F);
-  static const faint = Color(0xFF7A837C);
+  static const faint = Color(0xFF66706A);
   static const pine = Color(0xFF1E4D3B);
   static const pineDeep = Color(0xFF143528);
   static const pineSoft = Color(0xFFEDF2EF);

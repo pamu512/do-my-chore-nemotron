@@ -43,7 +43,7 @@ String? _jsonString(Object? v) {
   return t.isEmpty ? null : t;
 }
 
-/// Invokes `photo-assist`. On any failure, abstains — parent stays final.
+/// Invokes `photo-assist`. On any failure, abstains. The parent stays final.
 Future<PhotoAssistResult> invokePhotoAssist(
   SupabaseClient client, {
   required String choreTitle,

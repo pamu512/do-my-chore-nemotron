@@ -1,6 +1,6 @@
 # Shared Library Habits Implementation Plan
 
-> **For agentic workers:** Implement in this session. TDD: failing tests first.
+> **For implementers:** Implement in this session. Write a failing test first.
 
 **Goal:** One library habit is one Kid Today row across active goals; one submit / one parent decision; each goal keeps its own weight and cadence math.
 

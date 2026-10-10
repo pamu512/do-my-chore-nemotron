@@ -17,7 +17,7 @@
 :root{
   --paper:#F5EADF;         /* logo paper field */
   --bg:#FBFAF8; --surface:#FFFFFF; --ink:#1F2621; --ink2:#4A544D;
-  --muted:#5D675F; --faint:#7A837C;
+  --muted:#5D675F; --faint:#66706A;
   --pine:#1E4D3B; --pine-deep:#143528; --pine-soft:#EDF2EF;
   --marigold:#D98E2B; --marigold-deep:#8F5A12; --marigold-soft:#F9EEDD;
   --clay:#B45540; --clay-soft:#F7E9E5;
@@ -45,7 +45,10 @@ header{position:sticky;top:0;z-index:20;background:rgba(251,250,248,.92);backdro
 .nav .links a:hover{color:var(--pine)}
 .nav .cta{background:var(--pine);color:#fff;font-size:14px;font-weight:600;text-decoration:none;border-radius:10px;padding:9px 16px}
 .nav .cta:hover{background:var(--pine-deep)}
-@media(max-width:760px){.nav .links a:not(.cta){display:none}}
+@media(max-width:760px){
+  .nav{height:auto;min-height:64px;padding:10px 0;flex-wrap:wrap;row-gap:8px}
+  .nav .links{flex-wrap:wrap;justify-content:flex-end;row-gap:8px}
+}
 
 /* ---------- hero ---------- */
 .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;padding:72px 0 84px}
@@ -63,6 +66,10 @@ header{position:sticky;top:0;z-index:20;background:rgba(251,250,248,.92);backdro
 /* phone mock */
 .phone-wrap{display:flex;justify-content:center}
 .phone{width:300px;background:var(--bg);border:1px solid var(--line);border-radius:34px;overflow:hidden;box-shadow:0 24px 60px -30px rgba(31,38,33,.35)}
+@media(max-width:860px){
+  .hero{grid-template-columns:1fr;gap:32px;padding:40px 0 56px}
+  .phone{width:min(300px,100%)}
+}
 .phone .p-top{padding:12px 14px 0}
 .phone .p-brand{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:13px}
 .phone .p-honesty{font-size:9.5px;color:var(--faint);padding:1px 0 6px}
@@ -82,7 +89,7 @@ header{position:sticky;top:0;z-index:20;background:rgba(251,250,248,.92);backdro
 .p-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:10px}
 .p-hero{position:relative;height:96px}
 .p-hero img{width:100%;height:100%;object-fit:cover}
-.p-hero .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(31,38,33,.15),rgba(31,38,33,.72))}
+.p-hero .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(31,38,33,.25) 0%,rgba(31,38,33,.92) 62%,rgba(31,38,33,.92) 100%)}
 .p-hero .t{position:absolute;left:10px;right:10px;bottom:7px;color:#fff}
 .p-hero .t .micro{color:#E9E4D8;font-size:8px;letter-spacing:.09em}
 .p-hero .t h3{font-family:Fraunces,Georgia,serif;font-size:16px;font-weight:700;letter-spacing:-.02em}
@@ -146,7 +153,7 @@ section{padding:84px 0}
 @media(max-width:860px){.ai-grid{grid-template-columns:1fr}}
 
 /* album */
-.album-band{background:var(--pine-deep);color:#fff}
+.album-band{background:var(--pine-deep);color:#fff;overflow-x:clip}
 .album-band .micro{color:#C9B99A}
 .album-band h2{color:#fff}
 .album-band .sec-head p{color:#C9D4CC}
@@ -156,7 +163,7 @@ section{padding:84px 0}
 .pola:nth-child(3){transform:rotate(-.6deg)}
 .pola img{border-radius:2px;aspect-ratio:1;object-fit:cover;width:100%}
 .pola .cap{display:flex;justify-content:space-between;align-items:center;padding:7px 2px 0;font-size:12px;font-weight:600;color:#1F2621}
-.pola .del{color:#9AA39B}
+.pola .del{color:var(--muted)}
 @media(max-width:760px){.album-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.album-grid{grid-template-columns:1fr}}
 
@@ -233,7 +240,7 @@ footer{padding:44px 0 60px}
   </div>
 
   <div class="phone-wrap">
-    <div class="phone" role="img" aria-label="Kid Today screen with the Disneyland goal at 23 percent and chores">
+    <div class="phone" role="img" aria-label="Kid Today screen with the Disneyland goal after one bed check-in, at 0.4 percent, and chores">
       <div class="p-top">
         <div style="display:flex;justify-content:space-between;align-items:center">
           <span class="p-brand">Do My Chore</span>
@@ -251,12 +258,12 @@ footer{padding:44px 0 60px}
           </div>
           <div class="p-pad">
             <div class="rail">
-              <div class="track"></div><div class="fill" style="width:23%"></div>
-              <div class="dot" style="left:20%"></div><div class="dot on" style="left:20%"></div>
+              <div class="track"></div><div class="fill" style="width:0.4%"></div>
+              <div class="dot" style="left:20%"></div>
               <div class="castle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V9l3-3 3 3v3h4V9l3-3 3 3v13z"/><path d="M9 22v-4h6v4"/></svg></div>
             </div>
             <div class="railcaps"><span>0%</span><span>100%</span></div>
-            <div style="margin-top:8px"><span class="pct">23% <small>of the way there</small></span></div>
+            <div style="margin-top:8px"><span class="pct">0.4% <small>of the way there</small></span></div>
             <p style="font-size:10.5px;color:var(--muted);margin-top:3px">Every check-in moves the bar.</p>
           </div>
         </div>
@@ -413,7 +420,7 @@ footer{padding:44px 0 60px}
 <section class="stack-band" id="run">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="micro">Open source, runnable in minutes</span>
+      <span class="micro">Open source, runnable locally</span>
       <h2>Run it yourself</h2>
     </div>
     <div class="stack-grid">
@@ -429,7 +436,7 @@ cd app && flutter pub get
 flutter run \
   --dart-define=SUPABASE_URL=http://127.0.0.1:54321 \
   --dart-define=SUPABASE_ANON_KEY=&lt;from supabase status&gt;</code>
-        <p style="margin-top:12px;font-size:13px;color:var(--muted)">Needs Docker (Supabase runs local) and the Flutter SDK. The seeded demo family makes the loop reproducible in minutes.</p>
+        <p style="margin-top:12px;font-size:13px;color:var(--muted)">Needs Docker (Supabase runs local) and the Flutter SDK. The seeded demo family makes the loop reproducible.</p>
       </div>
       <div class="runbox reveal">
         <h3>Built with</h3>
@@ -439,7 +446,7 @@ flutter run \
           <span class="tech">Supabase Storage</span><span class="tech">Edge Functions (Deno)</span>
           <span class="tech">OpenAI (optional)</span><span class="tech">Python scripts</span>
         </div>
-        <p style="margin-top:16px;font-size:14px;color:var(--muted)">Seeded demo family: <b>parent@demo / kid@demo</b>. Seeded weights 40 / 30 / 20 / 10 add up to 100%. 114 tests keep the money math honest.</p>
+        <p style="margin-top:16px;font-size:14px;color:var(--muted)">Seeded demo family: <b>parent@demo / kid@demo</b>. Seeded weights 40 / 30 / 20 / 10 add up to 100%. Tests keep the money math honest.</p>
       </div>
     </div>
   </div>
